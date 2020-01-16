@@ -1,0 +1,46 @@
+<?php require_once('../../private/initialize.php'); 
+
+if(is_post_request()){
+	
+  
+  $member = [];
+  $member['member_ID'] = $id;
+  $member['first_name'] = $_POST['first_name'] ?? '';
+  $member['last_name'] = $_POST['last_name'] ?? '';
+  $member['email'] = $_POST['email'] ?? '';
+  $member['phone'] = $_POST['phone'] ?? '';
+  $member['member_level'] = $_POST['member_level'] ?? '';
+	//handles form values sent by new.php
+	//$first_name = $_POST['first_name'] ?? '';
+	//$last_name = $POST['last_name'] ?? '';
+	//$email = $POST['email'] ?? '';
+	//$phone = $POST['phone'] ?? '';
+	//$member_level = $POST['member_level'] ?? '';
+	
+  $result = insert_member($member);
+  $new_id = mysqli_insert_id($db);
+	//$sql = "INSERT INTO members ";
+	//$sql .= "(member_ID, first_name, last_name, email, phone, member_level) ";
+	//$sql .= "VALUES( ";
+  //$sql .= "NULL, ";
+	//$sql .= "'" . $first_name . "',";
+	//$sql .= "'" . $last_name . "',";
+	//$sql .= "'" . $email . "',";
+	//$sql .= "'" . $phone . "',";
+	//$sql .= "'" . $member_level . "'";
+	//$sql .= ")";
+	//$result = mysqli_query($db, $sql);
+	//for insert statments results is true/false
+	//if($result){
+	//	$new_id = mysqli_insert_id($id);
+		redirect_to(url_for('/staff/members/show.php?id=' . $new_id));
+	//}else{
+	//	echo mysqli_error($db);
+	//	db_disconnect($db);
+	//	exit;
+	}
+}else{
+	redirect_to(url_for('/staff/members/new.php'));
+}
+
+?>
